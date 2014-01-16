@@ -12,6 +12,7 @@ import com.directions.http.HttpManager;
 import com.directions.models.Route;
 import com.directions.models.RouteLeg;
 import com.directions.models.RouteStep;
+import com.directions.utils.JsonManager;
 import com.directions.utils.RouteDeserializer;
 import com.directions.utils.RouteLegDeserializer;
 import com.directions.utils.RouteStepDeserializer;
@@ -39,15 +40,9 @@ public class Driver {
 		
 		// Fetch the contents (JSON) of the response
 		InputStream directionStream = manager.fetchDirections();
-		Reader reader = new InputStreamReader(directionStream);
+		JsonManager jsonManager = new JsonManager(directionStream);
 		
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.registerTypeAdapter(Route.class, new RouteDeserializer());
-		gsonBuilder.registerTypeAdapter(RouteLeg.class, new RouteLegDeserializer());
-		gsonBuilder.registerTypeAdapter(RouteStep.class, new RouteStepDeserializer());
-		Gson gson = gsonBuilder.create();
-		
-		Route route = gson.fromJson(reader, Route.class);
+		Route route = jsonManager.getRoute();
 		
 		System.out.println(route.toString());
 	}
