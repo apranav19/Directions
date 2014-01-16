@@ -20,7 +20,7 @@ public final class HttpManager {
 	private URIBuilder uriBuilder;
 	private CloseableHttpClient httpClient;
 	private final String MAPS_URI = "http://maps.googleapis.com/maps/api/directions/json?origin=&destination=&sensor=false";
-	private String completeURI;
+	private String completeURI = null;
 	
 	/**
 	 * Constructor that instantiates a URI Builder & a HTTP client
@@ -28,7 +28,6 @@ public final class HttpManager {
 	 */
 	public HttpManager() throws URISyntaxException{
 		this.uriBuilder = new URIBuilder(this.MAPS_URI);
-		this.completeURI = null;
 		this.httpClient = HttpClients.createDefault();
 	}
 	
