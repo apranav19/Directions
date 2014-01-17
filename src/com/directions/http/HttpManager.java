@@ -88,7 +88,6 @@ public final class HttpManager {
 		this.jsonManager.setStream(directionStream);
 		
 		final Route route = this.jsonManager.getRoute();
-		this.jsonManager.closeStreams();
 		return route;
 	}
 }

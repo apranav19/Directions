@@ -13,7 +13,6 @@ import com.directions.http.HttpManager;
 import com.directions.models.Route;
 import com.directions.models.RouteLeg;
 import com.directions.models.RouteStep;
-import com.directions.utils.JsonManager;
 import com.directions.utils.RouteDeserializer;
 import com.directions.utils.RouteLegDeserializer;
 import com.directions.utils.RouteStepDeserializer;
@@ -34,8 +33,7 @@ public class Driver {
 	public static void main(String[] args) throws Exception {
 		HttpManager manager = new HttpManager();
 		// Create an array of addresses & feed them to the manager
-		String [] addresses = new String[]{START_ADDRESS, END_ADDRESS};
-		manager.setAddresses(addresses);
+		manager.setAddresses(new String[]{START_ADDRESS, END_ADDRESS});
 		Route route = manager.fetchDirections();
 		System.out.println(route.toString());
 	}
