@@ -40,7 +40,7 @@ public final class HttpManager {
 	 * @param addresses - The array that contains the start & end addresses
 	 * @throws URISyntaxException
 	 */
-	public void setAddresses(String [] addresses) throws URISyntaxException{
+	private void setAddresses(String [] addresses) throws URISyntaxException{
 		//Assuming first element represents start address
 		this.uriBuilder = this.uriBuilder.setParameter("origin", addresses[0]).setParameter("destination", addresses[1]);
 		this.setCompleteURI();
@@ -71,7 +71,9 @@ public final class HttpManager {
 	 * @return an InputStream object
 	 * @throws Exception
 	 */
-	public Route fetchDirections() throws Exception{
+	public Route fetchDirections(String [] addresses) throws Exception{
+		this.setAddresses(addresses);
+		
 		if(this.completeURI == null){
 			throw new Exception("Cannot fetch directions. Please enter a pair of addresses first");
 		}

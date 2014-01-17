@@ -32,9 +32,7 @@ public class Driver {
 	
 	public static void main(String[] args) throws Exception {
 		HttpManager manager = new HttpManager();
-		// Create an array of addresses & feed them to the manager
-		manager.setAddresses(new String[]{START_ADDRESS, END_ADDRESS});
-		Route route = manager.fetchDirections();
+		Route route = manager.fetchDirections(new String[]{START_ADDRESS, END_ADDRESS});
 		System.out.println(route.toString());
 	}
 }
