@@ -22,10 +22,11 @@ This code segment shows how you can fetch driving directions between these 2 add
 
 The output looks as follows:
 
-> Summary: University Ave
+    Summary: University Ave
     Distance: 2074; Duration: 296
     1. Head southwest on University Ave toward Florence St (Distance: 680; Duration: 123)
-2: Turn left to merge onto CA-82 S/El Camino Real (Distance: 647; Duration: 76)
-3: Turn right onto Galvez St (Distance: 555; Duration: 55)
-4: Turn left onto Nelson Rd (Distance: 192; Duration: 42)
+    2: Turn left to merge onto CA-82 S/El Camino Real (Distance: 647; Duration: 76)
+    3: Turn right onto Galvez St (Distance: 555; Duration: 55)
+    4: Turn left onto Nelson Rd (Distance: 192; Duration: 42)
 
+Note: At this time, the distance is representing in meters & the duration is represented in seconds. 
