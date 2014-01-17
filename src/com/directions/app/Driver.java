@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 
 import org.apache.http.HttpResponse;
 
@@ -31,19 +32,11 @@ public class Driver {
 	private final static String END_ADDRESS = "601 Nelson Rd, Stanford, CA";
 	
 	public static void main(String[] args) throws Exception {
-		
 		HttpManager manager = new HttpManager();
-		
 		// Create an array of addresses & feed them to the manager
 		String [] addresses = new String[]{START_ADDRESS, END_ADDRESS};
 		manager.setAddresses(addresses);
-		
-		// Fetch the contents (JSON) of the response
-		InputStream directionStream = manager.fetchDirections();
-		JsonManager jsonManager = new JsonManager(directionStream);
-		
-		Route route = jsonManager.getRoute();
-		
+		Route route = manager.fetchDirections();
 		System.out.println(route.toString());
 	}
 }

@@ -9,6 +9,8 @@ import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
+import com.directions.models.Route;
+
 /**
  * This class represents the HttpManager. The primary role of thsi class is to
  * handle communication with the Google Maps Directions web services.
@@ -20,13 +22,15 @@ public final class HttpManager {
 	private URIBuilder uriBuilder;
 	private CloseableHttpClient httpClient;
 	private final String MAPS_URI = "http://maps.googleapis.com/maps/api/directions/json?origin=&destination=&sensor=false";
-	private String completeURI = null;
+	private String completeURI;
+	private JsonManager jsonManager;
 	
 	/**
 	 * Constructor that instantiates a URI Builder & a HTTP client
 	 * @throws URISyntaxException
 	 */
 	public HttpManager() throws URISyntaxException{
+		this.jsonManager = new JsonManager();
 		this.uriBuilder = new URIBuilder(this.MAPS_URI);
 		this.httpClient = HttpClients.createDefault();
 	}
@@ -67,7 +71,7 @@ public final class HttpManager {
 	 * @return an InputStream object
 	 * @throws Exception
 	 */
-	public InputStream fetchDirections() throws Exception{
+	public Route fetchDirections() throws Exception{
 		if(this.completeURI == null){
 			throw new Exception("Cannot fetch directions. Please enter a pair of addresses first");
 		}
@@ -80,6 +84,11 @@ public final class HttpManager {
 			throw new Exception("Something went wrong! The HTTP status code is: " + httpStatusCode);
 		}
 		
-		return httpResponse.getEntity().getContent();
+		final InputStream directionStream = httpResponse.getEntity().getContent();
+		this.jsonManager.setStream(directionStream);
+		
+		final Route route = this.jsonManager.getRoute();
+		this.jsonManager.closeStreams();
+		return route;
 	}
 }
