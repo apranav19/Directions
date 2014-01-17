@@ -16,8 +16,7 @@ Let the addresses be as follows:
 This code segment shows how you can fetch driving directions between these 2 addresses:
 
     HttpManager manager = new HttpManager();
-    manager.setAddresses(new String[]{origin, destination});
-    Route route = manager.fetchDirections(); // Time to fetch the driving directions!
+    Route route = manager.fetchDirections(new String[]{origin, destination});
     System.out.println(route.toString());
 
 The output looks as follows:
@@ -29,4 +28,4 @@ The output looks as follows:
     3: Turn right onto Galvez St (Distance: 555; Duration: 55)
     4: Turn left onto Nelson Rd (Distance: 192; Duration: 42)
 
-Note: At this time, the distance is representing in meters & the duration is represented in seconds. 
+Note: At this time, the distance is represented in meters & the duration is represented in seconds. 
