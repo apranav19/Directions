@@ -14,14 +14,14 @@ import com.directions.utils.RouteStepDeserializer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class JsonManager {
+class JsonManager {
 	
 	private GsonBuilder builder;
 	private Reader reader;
 	
 	private InputStream directionStream;
 	
-	public JsonManager(){
+	JsonManager(){
 		this.builder = new GsonBuilder();
 		this.registerDeserializers();
 	}
@@ -36,13 +36,13 @@ public class JsonManager {
 		this.reader = new InputStreamReader(stream);
 	}
 	
-	public Route getRoute(){
+	Route getRoute(){
 		final Gson gson = this.builder.create();
 		final Route route = gson.fromJson(this.reader, Route.class);
 		return route;
 	}
 	
-	public void closeStreams() throws IOException{
+	void closeStreams() throws IOException{
 		this.directionStream.close();
 	}
 }
